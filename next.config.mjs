@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:action',
-        destination: 'http://127.0.0.1:8000/api.php?action=:action',
+        destination: 'http://127.0.0.1:8000/api/:action',
       },
     ];
   },
