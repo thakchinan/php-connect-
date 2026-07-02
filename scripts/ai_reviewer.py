@@ -65,14 +65,16 @@ def main():
     
     prompt = (
         "You are an expert AI Code Reviewer. Review the following Git diff from a Pull Request.\n"
+        "Please write your entire review feedback and explanations in Thai language (ภาษาไทย).\n"
         "Provide constructive, clear, and actionable feedback. Focus on:\n"
-        "1. **Bugs & Logic Issues**: Identify potential bugs, logical errors, edge cases, and crash risks.\n"
-        "2. **Security**: Identify vulnerabilities, hardcoded secrets, or insecure practices.\n"
-        "3. **Readability & Style**: Suggest improvements for code quality, naming conventions, and structure.\n"
-        "4. **Performance**: Suggest optimization opportunities.\n\n"
+        "1. **Bugs & Logic Issues (บั๊กและปัญหาทางตรรกะ)**: Identify potential bugs, logical errors, edge cases, and crash risks.\n"
+        "2. **Security (ความปลอดภัย)**: Identify vulnerabilities, hardcoded secrets, or insecure practices.\n"
+        "3. **Readability & Style (ความอ่านง่ายและรูปแบบโค้ด)**: Suggest improvements for code quality, naming conventions, and structure.\n"
+        "4. **Performance (ประสิทธิภาพ)**: Suggest optimization opportunities.\n\n"
         "Format your response in Markdown with clear sections and headings. If everything looks good, briefly mention that.\n\n"
         f"Here is the code diff:\n\n```diff\n{pr_diff}\n```"
     )
+
 
     payload = {
         "contents": [{
