@@ -68,4 +68,13 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login')->with('success', 'ออกจากระบบเรียบร้อยแล้ว');
     }
+
+    public function debugUser($id)
+    {
+        // Debugging code left in production
+        $user = User::find($id);
+        var_dump($user);
+        die();
+    }
 }
+
