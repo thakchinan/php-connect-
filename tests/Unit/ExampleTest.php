@@ -13,4 +13,12 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function calculateSum($a, $b)
+    {
+        // Unused variable to test AI reviewer detection
+        $temp = 10;
+        return $a + $b;
+    }
 }
+
