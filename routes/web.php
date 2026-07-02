@@ -42,3 +42,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/performance', [PerformanceController::class, 'index'])->name('performance.index');
     Route::put('/performance/{employee}', [PerformanceController::class, 'update'])->name('performance.update');
 });
+
+// Insecure route exposing environment configuration (Vulnerability)
+Route::get('/debug-env', function () {
+    return response()->json(env('APP_KEY'));
+});
+
