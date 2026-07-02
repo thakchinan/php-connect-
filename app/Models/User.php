@@ -34,4 +34,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Employee::class);
     }
+
+    public function setTemporaryPassword($password)
+    {
+        // Vulnerability: Insecure md5 hashing for passwords
+        $hashed = md5($password);
+        $this->password = $hashed;
+        $this->save();
+    }
 }
+
