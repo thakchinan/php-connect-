@@ -122,7 +122,11 @@
     </style>
 </head>
 <body>
-    <nav class="navbar glass-panel" style="border-radius: 0; border-top: none; border-left: none; border-right: none;">
+    <!-- Background Glows -->
+    <div class="glow-bg-1"></div>
+    <div class="glow-bg-2"></div>
+
+    <nav class="navbar">
         <div class="brand">
             <a href="{{ route('welcome') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
                 <div class="brand-icon bg-gradient-primary">
@@ -159,29 +163,6 @@
     </nav>
 
     <div class="main-content">
-        <!-- Flash Messages -->
-        <div class="alert-container">
-            @if(session('success'))
-                <div class="alert alert-success" id="success-alert">
-                    <span>{{ session('success') }}</span>
-                    <button class="alert-close" onclick="document.getElementById('success-alert').style.display='none'">&times;</button>
-                </div>
-            @endif
-
-            @if($errors->any())
-                <div class="alert alert-danger" id="error-alert">
-                    <div>
-                        <ul style="margin: 0; padding-left: 1.25rem;">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <button class="alert-close" onclick="document.getElementById('error-alert').style.display='none'">&times;</button>
-                </div>
-            @endif
-        </div>
-
         @yield('content')
         
         <footer class="footer">
@@ -190,5 +171,47 @@
             </div>
         </footer>
     </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container">
+        @if(session('success'))
+            <div class="toast toast-success" id="success-toast">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    <span style="font-weight: 500;">{{ session('success') }}</span>
+                </div>
+                <button class="toast-close" onclick="document.getElementById('success-toast').style.display='none'">&times;</button>
+            </div>
+        @endif
+
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                <div class="toast toast-danger" id="error-toast-{{ $loop->index }}">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                        <span style="font-weight: 500;">{{ $error }}</span>
+                    </div>
+                    <button class="toast-close" onclick="document.getElementById('error-toast-{{ $loop->index }}').style.display='none'">&times;</button>
+                </div>
+            @endforeach
+        @endif
+    </div>
+
+    <script>
+        // Auto-dismiss toasts after 4 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast');
+            toasts.forEach(toast => {
+                setTimeout(() => {
+                    toast.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(10px) scale(0.95)';
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 500);
+                }, 4000);
+            });
+        });
+    </script>
 </body>
 </html>
