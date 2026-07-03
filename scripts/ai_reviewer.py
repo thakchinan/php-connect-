@@ -107,9 +107,10 @@ def main():
         "Content-Type": "application/json"
     }
     
-    # Prepend a header to the comment
+    # Prepend a header to the comment and mention @thakchinan
     formatted_comment = (
         "### 🤖 ผลการรีวิวโค้ดโดย AI\n\n"
+        "เรียน @thakchinan โปรดช่วยตรวจสอบและรีวิวโค้ดใน Pull Request นี้ด้วยครับ รายละเอียดการรีวิวโดย AI ด้านล่างนี้:\n\n"
         f"{review_text}\n\n"
         "*รีวิวโดย Gemini 2.5 Flash*"
     )
@@ -128,6 +129,26 @@ def main():
         sys.exit(1)
 
     print("AI Review successfully posted to Pull Request!")
+
+    # 4. Request review from the repository owner (thakchinan)
+    reviewers_url = f"https://api.github.com/repos/{repo_name}/pulls/{pull_number}/requested_reviewers"
+    reviewers_headers = {
+        "Authorization": f"Bearer {github_token}",
+        "Accept": "application/vnd.github.v3+json",
+        "Content-Type": "application/json"
+    }
+    reviewers_payload = {
+        "reviewers": ["thakchinan"]
+    }
+    try:
+        reviewers_response = requests.post(reviewers_url, headers=reviewers_headers, json=reviewers_payload)
+        # We don't exit on error here because it's non-blocking (e.g. if run by the user themselves, GitHub might ignore it)
+        if reviewers_response.status_code == 201 or reviewers_response.status_code == 200:
+            print("Successfully requested review from thakchinan!")
+        else:
+            print(f"Request review status code: {reviewers_response.status_code}, Response: {reviewers_response.text}")
+    except Exception as e:
+        print(f"Warning: Could not request review from thakchinan: {e}")
 
 if __name__ == "__main__":
     main()
