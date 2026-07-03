@@ -64,15 +64,17 @@ def main():
     gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={ai_api_key}"
     
     prompt = (
-        "You are an expert AI Code Reviewer. Review the following Git diff from a Pull Request.\n"
-        "Provide constructive, clear, and actionable feedback. Focus on:\n"
-        "1. **Bugs & Logic Issues**: Identify potential bugs, logical errors, edge cases, and crash risks.\n"
-        "2. **Security**: Identify vulnerabilities, hardcoded secrets, or insecure practices.\n"
-        "3. **Readability & Style**: Suggest improvements for code quality, naming conventions, and structure.\n"
-        "4. **Performance**: Suggest optimization opportunities.\n\n"
-        "Format your response in Markdown with clear sections and headings. If everything looks good, briefly mention that.\n\n"
-        f"Here is the code diff:\n\n```diff\n{pr_diff}\n```"
+        "คุณคือ AI ผู้เชี่ยวชาญด้านการรีวิวโค้ด (AI Code Reviewer) โปรดรีวิวความเปลี่ยนแปลงจาก Git diff ของ Pull Request ต่อไปนี้\n"
+        "โปรดเขียนผลการรีวิว คำอธิบาย และข้อแนะนำทั้งหมดเป็นภาษาไทย\n"
+        "โปรดให้คำแนะนำที่สร้างสรรค์ ชัดเจน และนำไปปฏิบัติได้จริง โดยมุ่งเน้นไปที่หัวข้อต่อไปนี้:\n"
+        "1. **บั๊กและปัญหาทางตรรกะ (Bugs & Logic Issues)**: ค้นหาบั๊กที่อาจเกิดขึ้น ข้อผิดพลาดทางตรรกะ เคสพิเศษ (edge cases) และความเสี่ยงที่จะทำให้โปรแกรมพัง\n"
+        "2. **ความปลอดภัย (Security)**: ค้นหาช่องโหว่ รหัสลับที่ฮาร์ดโค้ดไว้ (hardcoded secrets) หรือแนวทางปฏิบัติที่ไม่ปลอดภัย\n"
+        "3. **ความอ่านง่ายและรูปแบบโค้ด (Readability & Style)**: เสนอแนะการปรับปรุงคุณภาพโค้ด การตั้งชื่อที่เป็นมาตรฐาน และโครงสร้างของโค้ด\n"
+        "4. **ประสิทธิภาพ (Performance)**: เสนอแนะโอกาสในการปรับแต่งประสิทธิภาพให้ดีขึ้น\n\n"
+        "จัดรูปแบบคำตอบของคุณในรูปแบบ Markdown โดยแยกเป็นหัวข้อและหัวเรื่องที่ชัดเจน หากโค้ดทั้งหมดเรียบร้อยดีอยู่แล้ว ให้ระบุสั้นๆ ว่าไม่มีประเด็นที่ต้องแก้ไข\n\n"
+        f"นี่คือความแตกต่างของโค้ด (Git diff):\n\n```diff\n{pr_diff}\n```"
     )
+
 
     payload = {
         "contents": [{
@@ -107,9 +109,9 @@ def main():
     
     # Prepend a header to the comment
     formatted_comment = (
-        "### 🤖 AI Code Reviewer Feedback\n\n"
+        "### 🤖 ผลการรีวิวโค้ดโดย AI\n\n"
         f"{review_text}\n\n"
-        "*Reviewed by Gemini 2.5 Flash*"
+        "*รีวิวโดย Gemini 2.5 Flash*"
     )
 
     comment_payload = {
