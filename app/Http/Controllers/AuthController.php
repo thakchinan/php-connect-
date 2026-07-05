@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Employee;
+use App\Models\Department;
+use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -39,22 +43,66 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
-        return view('auth.register');
+        $departments = Department::with('positions')->orderBy('name')->get();
+        return view('auth.register', compact('departments'));
     }
 
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+        $role = $request->input('role', 'employee');
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($role === 'employee') {
+            $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email',
+                'password' => 'required|string|min:6|confirmed',
+                'phone' => 'nullable|string|max:20',
+                'date_of_birth' => 'nullable|date',
+                'department_id' => 'required|exists:departments,id',
+                'position_id' => 'required|exists:positions,id',
+                'join_date' => 'nullable|date',
+            ]);
+
+            $user = DB::transaction(function() use ($request) {
+                // Create user
+                $user = User::create([
+                    'name' => $request->first_name . ' ' . $request->last_name,
+                    'email' => $request->email,
+                    'password' => Hash::make($request->password),
+                    'role' => 'employee',
+                ]);
+
+                // Create associated employee profile
+                Employee::create([
+                    'user_id' => $user->id,
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'phone' => $request->phone,
+                    'date_of_birth' => $request->date_of_birth,
+                    'join_date' => $request->join_date ?? now()->toDateString(),
+                    'department_id' => $request->department_id,
+                    'position_id' => $request->position_id,
+                    'status' => 'active',
+                    'performance_score' => 80, // Default entry score
+                ]);
+
+                return $user;
+            });
+        } else {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'manager',
+            ]);
+        }
 
         Auth::login($user);
 

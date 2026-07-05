@@ -127,25 +127,25 @@
     <div class="glow-bg-2"></div>
 
     <nav class="navbar">
-        <div class="brand">
-            <a href="{{ route('welcome') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
-                <div class="brand-icon bg-gradient-primary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                </div>
-                Digital HR
-            </a>
+        <div style="display: flex; align-items: center; gap: 2.5rem;">
+            <div class="brand">
+                <a href="{{ route('welcome') }}" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit;">
+                    <div class="brand-icon bg-gradient-primary">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    Digital HR
+                </a>
+            </div>
+            
+            <ul class="navbar-nav">
+                @auth
+                    <li><a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a></li>
+                    <li><a href="{{ route('employees.index') }}" class="nav-link {{ request()->routeIs('employees.*') ? 'active' : '' }}">Employees</a></li>
+                    <li><a href="{{ route('leaves.index') }}" class="nav-link {{ request()->routeIs('leaves.*') ? 'active' : '' }}">Leave & Time</a></li>
+                    <li><a href="{{ route('performance.index') }}" class="nav-link {{ request()->routeIs('performance.*') ? 'active' : '' }}">Performance</a></li>
+                @endauth
+            </ul>
         </div>
-        
-        <ul class="navbar-nav">
-            @auth
-                <li><a href="{{ route('dashboard') }}" class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a></li>
-                <li><a href="{{ route('employees.index') }}" class="nav-link {{ request()->routeIs('employees.*') ? 'active' : '' }}">Employees</a></li>
-                <li><a href="{{ route('leaves.index') }}" class="nav-link {{ request()->routeIs('leaves.*') ? 'active' : '' }}">Leave & Time</a></li>
-                <li><a href="{{ route('performance.index') }}" class="nav-link {{ request()->routeIs('performance.*') ? 'active' : '' }}">Performance</a></li>
-            @else
-                <li><a href="{{ route('welcome') }}" class="nav-link {{ request()->routeIs('welcome') ? 'active' : '' }}">หน้าแรก</a></li>
-            @endauth
-        </ul>
 
         <div class="navbar-actions">
             @auth
