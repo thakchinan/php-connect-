@@ -54,27 +54,27 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // 3. Create Positions
+        // 3. Create Positions dynamically based on created department IDs
         $positions = [
             // HR (Dept 0)
-            ['title' => 'HR Specialist', 'department_id' => 1, 'base_salary' => 35000],
-            ['title' => 'Recruitment Officer', 'department_id' => 1, 'base_salary' => 28000],
-            ['title' => 'Training Developer', 'department_id' => 1, 'base_salary' => 30000],
+            ['title' => 'HR Specialist', 'department_id' => $createdDepts[0]->id, 'base_salary' => 35000],
+            ['title' => 'Recruitment Officer', 'department_id' => $createdDepts[0]->id, 'base_salary' => 28000],
+            ['title' => 'Training Developer', 'department_id' => $createdDepts[0]->id, 'base_salary' => 30000],
             
             // IT (Dept 1)
-            ['title' => 'Senior Developer', 'department_id' => 2, 'base_salary' => 65000],
-            ['title' => 'Junior Developer', 'department_id' => 2, 'base_salary' => 32000],
-            ['title' => 'Co-op Web Developer', 'department_id' => 2, 'base_salary' => 15000],
-            ['title' => 'System Administrator', 'department_id' => 2, 'base_salary' => 45000],
+            ['title' => 'Senior Developer', 'department_id' => $createdDepts[1]->id, 'base_salary' => 65000],
+            ['title' => 'Junior Developer', 'department_id' => $createdDepts[1]->id, 'base_salary' => 32000],
+            ['title' => 'Co-op Web Developer', 'department_id' => $createdDepts[1]->id, 'base_salary' => 15000],
+            ['title' => 'System Administrator', 'department_id' => $createdDepts[1]->id, 'base_salary' => 45000],
             
             // ENG (Dept 2)
-            ['title' => 'Process Engineer', 'department_id' => 3, 'base_salary' => 48000],
-            ['title' => 'Automation Engineer', 'department_id' => 3, 'base_salary' => 52000],
-            ['title' => 'Safety Officer', 'department_id' => 3, 'base_salary' => 35000],
+            ['title' => 'Process Engineer', 'department_id' => $createdDepts[2]->id, 'base_salary' => 48000],
+            ['title' => 'Automation Engineer', 'department_id' => $createdDepts[2]->id, 'base_salary' => 52000],
+            ['title' => 'Safety Officer', 'department_id' => $createdDepts[2]->id, 'base_salary' => 35000],
 
             // Sales & Marketing (Dept 3)
-            ['title' => 'Marketing Manager', 'department_id' => 4, 'base_salary' => 55000],
-            ['title' => 'Brand Executive', 'department_id' => 4, 'base_salary' => 32000],
+            ['title' => 'Marketing Manager', 'department_id' => $createdDepts[3]->id, 'base_salary' => 55000],
+            ['title' => 'Brand Executive', 'department_id' => $createdDepts[3]->id, 'base_salary' => 32000],
         ];
 
         $createdPositions = [];
