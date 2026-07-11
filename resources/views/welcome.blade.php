@@ -17,24 +17,24 @@
         </div>
 
         <!-- Mock App Dashboard Showcase -->
-        <div class="animate-fade-in delay-100" style="margin: 4.5rem auto 0; max-width: 960px; border-radius: var(--radius-lg); border: 1px solid rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: 0 30px 60px rgba(99, 102, 241, 0.08), 0 2px 12px rgba(0, 0, 0, 0.02); overflow: hidden; border: 1px solid rgba(99, 102, 241, 0.15);">
+        <div class="animate-fade-in delay-100" style="margin: 4.5rem auto 0; max-width: 960px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); background: var(--card-bg); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); box-shadow: var(--shadow-lg); overflow: hidden;">
             <!-- Window Control Header -->
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: rgba(255, 255, 255, 0.6); border-bottom: 1px solid rgba(226, 232, 240, 0.8);">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; background: rgba(150, 150, 150, 0.05); border-bottom: 1px solid var(--border-color);">
                 <div style="display: flex; gap: 6px;">
                     <span style="width: 12px; height: 12px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
                     <span style="width: 12px; height: 12px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
                     <span style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; display: inline-block;"></span>
                 </div>
-                <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; font-family: monospace; background: rgba(226, 232, 240, 0.6); padding: 0.25rem 1.5rem; border-radius: 6px; border: 1px solid rgba(226, 232, 240, 0.8);">
+                <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; font-family: monospace; background: rgba(150, 150, 150, 0.1); padding: 0.25rem 1.5rem; border-radius: 6px; border: 1px solid var(--border-color);">
                     hr-management.system/dashboard
                 </div>
                 <div style="width: 48px;"></div>
             </div>
             
             <!-- Showcase Content -->
-            <div style="padding: 2.25rem; display: grid; grid-template-columns: 220px 1fr; gap: 2rem; text-align: left; background: rgba(255, 255, 255, 0.25);">
+            <div style="padding: 2.25rem; display: grid; grid-template-columns: 220px 1fr; gap: 2rem; text-align: left; background: rgba(150, 150, 150, 0.01);">
                 <!-- Mock Sidebar -->
-                <div style="display: flex; flex-direction: column; gap: 0.75rem; border-right: 1px solid rgba(226, 232, 240, 0.8); padding-right: 1.5rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; border-right: 1px solid var(--border-color); padding-right: 1.5rem;">
                     <div style="height: 36px; background: rgba(99, 102, 241, 0.08); border-radius: 8px; display: flex; align-items: center; padding: 0 0.875rem; gap: 0.625rem; color: var(--primary-color); font-weight: 700; font-size: 0.85rem;">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
                         Dashboard
@@ -57,35 +57,35 @@
                 <div>
                     <!-- Top stats -->
                     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 1.75rem;">
-                        <div style="background: white; border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
+                        <div style="background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
                             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.35rem;">พนักงานทั้งหมด</span>
                             <span style="font-size: 1.5rem; font-weight: 800; color: var(--text-main);">124 <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">คน</span></span>
                         </div>
-                        <div style="background: white; border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
+                        <div style="background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
                             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.35rem;">แผนกงาน</span>
                             <span style="font-size: 1.5rem; font-weight: 800; color: var(--text-main);">4 <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">แผนก</span></span>
                         </div>
-                        <div style="background: white; border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
+                        <div style="background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1rem 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
                             <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600; display: block; margin-bottom: 0.35rem;">คำขอวันลา (Active)</span>
                             <span style="font-size: 1.5rem; font-weight: 800; color: #f59e0b;">5 <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">รายการ</span></span>
                         </div>
                     </div>
                     
                     <!-- Table Mock -->
-                    <div style="background: white; border: 1px solid rgba(226, 232, 240, 0.8); border-radius: 12px; padding: 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
+                    <div style="background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; box-shadow: 0 4px 6px rgba(0,0,0,0.01);">
                         <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-main); margin-bottom: 1rem;">รายชื่อพนักงานเข้าใหม่ล่าสุด</div>
                         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                             <!-- row 1 -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding-bottom: 0.625rem; border-bottom: 1px solid rgba(226, 232, 240, 0.5);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding-bottom: 0.625rem; border-bottom: 1px solid var(--border-color);">
                                 <span style="font-weight: 600; color: var(--text-main);">ณภัทร สมบูรณ์</span>
                                 <span style="color: var(--text-muted);">IT & Development</span>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: #047857; padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; border: 1px solid rgba(16,185,129,0.15);">Active</span>
+                                <span class="badge badge-success">Active</span>
                             </div>
                             <!-- row 2 -->
-                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding-bottom: 0.625rem; border-bottom: 1px solid rgba(226, 232, 240, 0.5);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding-bottom: 0.625rem; border-bottom: 1px solid var(--border-color);">
                                 <span style="font-weight: 600; color: var(--text-main);">สุภัทรา ใจดี</span>
                                 <span style="color: var(--text-muted);">HR & OD</span>
-                                <span style="background: rgba(16, 185, 129, 0.1); color: #047857; padding: 2px 10px; border-radius: 999px; font-size: 0.7rem; font-weight: 600; border: 1px solid rgba(16,185,129,0.15);">Active</span>
+                                <span class="badge badge-success">Active</span>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
     <!-- Feature Grid -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;" class="animate-fade-in delay-200">
         <!-- Feature 1 -->
-        <a href="{{ Auth::check() ? route('employees.index') : route('login') }}" class="card glass-card" style="border-radius: var(--radius-lg); padding: 2.25rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; display: block;">
+        <a href="{{ Auth::check() ? route('employees.index') : route('login') }}" class="card glass-card" style="border-radius: var(--radius-lg); padding: 2.25rem; text-decoration: none; color: inherit; display: block;">
             <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(99, 102, 241, 0.08); color: var(--primary-color); display: flex; align-items: center; justify-content: center; margin-bottom: 1.75rem;">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             </div>
@@ -106,7 +106,7 @@
         </a>
 
         <!-- Feature 2 -->
-        <a href="{{ Auth::check() ? route('leaves.index') : route('login') }}" class="card glass-card" style="border-radius: var(--radius-lg); padding: 2.25rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; display: block;">
+        <a href="{{ Auth::check() ? route('leaves.index') : route('login') }}" class="card glass-card" style="border-radius: var(--radius-lg); padding: 2.25rem; text-decoration: none; color: inherit; display: block;">
             <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(16, 185, 129, 0.08); color: var(--secondary-color); display: flex; align-items: center; justify-content: center; margin-bottom: 1.75rem;">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
@@ -115,7 +115,7 @@
         </a>
 
         <!-- Feature 3 -->
-        <a href="{{ Auth::check() ? route('performance.index') : route('login') }}" class="card glass-card" style="border-radius: var(--radius-lg); padding: 2.25rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; display: block;">
+        <a href="{{ Auth::check() ? route('performance.index') : route('login') }}" class="card glass-card" style="border-radius: var(--radius-lg); padding: 2.25rem; text-decoration: none; color: inherit; display: block;">
             <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(245, 158, 11, 0.08); color: #f59e0b; display: flex; align-items: center; justify-content: center; margin-bottom: 1.75rem;">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
             </div>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital HR System</title>
     <meta name="description" content="Modern Digital HR Management System for enterprise">
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter & Sarabun -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,115 +13,26 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     <style>
-        body {
-            font-family: 'Sarabun', 'Inter', sans-serif;
-        }
-        /* Alert Banner Styles */
-        .alert-container {
-            max-width: 1200px;
-            margin: 1rem auto 0;
-            padding: 0 1rem;
-        }
-        .alert {
-            padding: 1rem 1.25rem;
-            border-radius: var(--radius-md);
-            margin-bottom: 1rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-        .alert-success {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: #047857;
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-        .alert-danger {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: #b91c1c;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-        .alert-close {
-            cursor: pointer;
-            background: none;
-            border: none;
-            color: inherit;
-            font-weight: bold;
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-        /* Active nav link highlight */
+        /* Small layout helper for navigation links inside page content */
         .nav-link.active {
             color: var(--primary-color);
-            border-bottom: 2px solid var(--primary-color);
-        }
-        /* Glass card enhancement */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-        }
-        /* Grid and Forms utility */
-        .form-group {
-            margin-bottom: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.375rem;
-        }
-        .form-label {
+            background: rgba(99, 102, 241, 0.08);
             font-weight: 600;
-            font-size: 0.875rem;
-            color: var(--text-main);
-        }
-        .form-control {
-            padding: 0.625rem 0.875rem;
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            font-size: 0.875rem;
-            font-family: inherit;
-            outline: none;
-            transition: all 0.2s ease;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.625rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            border-radius: 9999px;
-        }
-        .badge-success {
-            background-color: rgba(16, 185, 129, 0.1);
-            color: #065f46;
-        }
-        .badge-warning {
-            background-color: rgba(245, 158, 11, 0.1);
-            color: #92400e;
-        }
-        .badge-danger {
-            background-color: rgba(239, 68, 68, 0.1);
-            color: #991b1b;
-        }
-        /* Footer */
-        .footer {
-            margin-top: auto;
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
+    <script>
+        // Apply theme immediately to body to prevent screen flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.classList.add('dark-mode');
+            }
+        })();
+    </script>
+
     <!-- Background Glows -->
     <div class="glow-bg-1"></div>
     <div class="glow-bg-2"></div>
@@ -147,7 +58,15 @@
             </ul>
         </div>
 
-        <div class="navbar-actions">
+        <div class="navbar-actions" style="display: flex; align-items: center; gap: 1rem;">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text-main); display: flex; align-items: center; justify-content: center; padding: 0.5rem; border-radius: 50%; width: 38px; height: 38px; transition: background-color 0.2s;" title="สลับโหมดแสง/มืด">
+                <!-- Moon SVG -->
+                <svg id="theme-toggle-dark-icon" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <!-- Sun SVG -->
+                <svg id="theme-toggle-light-icon" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+
             @auth
                 <div style="display: flex; align-items: center; gap: 1rem;">
                     <span style="font-size: 0.875rem; font-weight: 500; color: var(--text-main);">สวัสดี, <strong>{{ Auth::user()->name }}</strong></span>
@@ -198,8 +117,8 @@
     </div>
 
     <script>
-        // Auto-dismiss toasts after 4 seconds
         document.addEventListener('DOMContentLoaded', function() {
+            // Auto-dismiss toasts after 4 seconds
             const toasts = document.querySelectorAll('.toast');
             toasts.forEach(toast => {
                 setTimeout(() => {
@@ -210,6 +129,33 @@
                         toast.remove();
                     }, 500);
                 }, 4000);
+            });
+
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+            function updateIcons() {
+                if (document.body.classList.contains('dark-mode')) {
+                    darkIcon.style.display = 'none';
+                    lightIcon.style.display = 'block';
+                } else {
+                    darkIcon.style.display = 'block';
+                    lightIcon.style.display = 'none';
+                }
+            }
+            
+            updateIcons();
+
+            themeToggleBtn.addEventListener('click', function() {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+                updateIcons();
             });
         });
     </script>
