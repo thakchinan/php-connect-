@@ -106,6 +106,7 @@
         </div>
         @endif
 
+        @if($totalEmployees > 0)
         <!-- Department Distribution Simple CSS Chart -->
         <div class="card glass-card" style="border-radius: var(--radius-lg); padding: 2rem;">
             <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; color: var(--text-main);">สัดส่วนจำนวนพนักงานแต่ละแผนก</h3>
@@ -130,6 +131,7 @@
                 @endforeach
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection

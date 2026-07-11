@@ -18,13 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Create a Manager User
-        $admin = User::create([
-            'name' => 'สมชาย มั่นคง (Manager)',
-            'email' => 'manager@scg.com',
-            'password' => Hash::make('password123'),
-        ]);
-
         // 2. Create Departments
         $depts = [
             [
@@ -50,7 +43,7 @@ class DatabaseSeeder extends Seeder
             $createdDepts[] = Department::create([
                 'name' => $dept['name'],
                 'description' => $dept['description'],
-                'manager_id' => $admin->id,
+                'manager_id' => null,
             ]);
         }
 

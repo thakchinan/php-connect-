@@ -36,12 +36,6 @@
             ยังไม่มีบัญชีผู้ใช้งานใช่ไหม? 
             <a href="{{ route('register') }}" style="color: var(--primary-color); font-weight: 700; text-decoration: none; hover: text-decoration: underline;">สมัครสมาชิกใหม่</a>
         </div>
-        
-        <div style="margin-top: 1.75rem; background: rgba(99, 102, 241, 0.05); padding: 1.25rem; border-radius: var(--radius-md); font-size: 0.85rem; border: 1px dashed rgba(99, 102, 241, 0.2); line-height: 1.6;">
-            <strong style="color: var(--primary-color); display: block; margin-bottom: 0.375rem;">ข้อมูลเข้าสู่ระบบสำหรับทดสอบ (Demo Credentials):</strong>
-            อีเมล: <code style="font-weight: 700; color: var(--primary-hover); font-family: monospace;">manager@scg.com</code><br/>
-            รหัสผ่าน: <code style="font-weight: 700; color: var(--primary-hover); font-family: monospace;">password123</code>
-        </div>
     </div>
 </div>
 @endsection
