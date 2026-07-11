@@ -4,25 +4,25 @@
 <div class="container animate-fade-in" style="margin-top: 2rem; margin-bottom: 4rem;">
     <!-- Header -->
     <div style="margin-bottom: 2rem;">
-        <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">การประเมินผลงาน (Performance)</h1>
+        <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;" class="text-gradient">การประเมินผลงาน (Performance)</h1>
         <p style="color: var(--text-muted);">วิเคราะห์คะแนนความสำเร็จตามวัตถุประสงค์และผลลัพธ์หลัก (OKRs) และคะแนนประเมินการทำงานประจำปี</p>
     </div>
 
     <!-- Performance Grid -->
-    <div class="card glass-card" style="border-radius: var(--radius-lg); padding: 2rem;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem;">คะแนนประเมินพนักงานรายบุคคล</h3>
+    <div class="card glass-card" style="padding: 2rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-main);">คะแนนประเมินพนักงานรายบุคคล</h3>
 
         @if(count($employees) > 0)
             <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;">
+                <table>
                     <thead>
-                        <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted); font-weight: 700; font-size: 0.75rem; text-transform: uppercase;">
-                            <th style="padding: 1rem;">พนักงาน</th>
-                            <th style="padding: 1rem;">แผนกงาน</th>
-                            <th style="padding: 1rem;">ตำแหน่ง</th>
-                            <th style="padding: 1rem;">คะแนนผลงานปัจจุบัน</th>
-                            <th style="padding: 1rem;">ระดับประเมิน (Grade)</th>
-                            <th style="padding: 1rem; text-align: right;">การประเมินใหม่</th>
+                        <tr>
+                            <th>พนักงาน</th>
+                            <th>แผนกงาน</th>
+                            <th>ตำแหน่ง</th>
+                            <th>คะแนนผลงานปัจจุบัน</th>
+                            <th>ระดับประเมิน (Grade)</th>
+                            <th style="text-align: right;">การประเมินใหม่</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,24 +36,24 @@
                                 elseif ($score >= 70) { $grade = 'C (Average)'; $gradeClass = 'badge-warning'; }
                                 elseif ($score >= 60) { $grade = 'D (Below Avg)'; $gradeClass = 'badge-warning'; }
                             @endphp
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 1rem; font-weight: 600;">
+                            <tr>
+                                <td style="font-weight: 600;">
                                     {{ $emp->first_name }} {{ $emp->last_name }}
                                 </td>
-                                <td style="padding: 1rem; color: var(--text-muted);">{{ $emp->department->name ?? '-' }}</td>
-                                <td style="padding: 1rem; color: var(--text-muted);">{{ $emp->position->title ?? '-' }}</td>
-                                <td style="padding: 1rem; font-weight: 700;">
+                                <td style="color: var(--text-muted);">{{ $emp->department->name ?? '-' }}</td>
+                                <td style="color: var(--text-muted);">{{ $emp->position->title ?? '-' }}</td>
+                                <td style="font-weight: 700;">
                                     <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <div style="width: 60px; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                                        <div style="width: 60px; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden;">
                                             <div style="width: {{ $score }}%; height: 100%;" class="bg-gradient-primary"></div>
                                         </div>
                                         <span>{{ $score }} / 100</span>
                                     </div>
                                 </td>
-                                <td style="padding: 1rem;">
+                                <td>
                                     <span class="badge {{ $gradeClass }}">{{ $grade }}</span>
                                 </td>
-                                <td style="padding: 1rem; text-align: right;">
+                                <td style="text-align: right;">
                                     <form action="{{ route('performance.update', $emp->id) }}" method="POST" style="margin: 0; display: inline-flex; align-items: center; gap: 0.5rem;">
                                         @csrf
                                         @method('PUT')

@@ -5,7 +5,7 @@
     <!-- Header -->
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
         <div>
-            <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">จัดการข้อมูลพนักงาน (Employees)</h1>
+            <h1 style="font-size: 2.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;" class="text-gradient">จัดการข้อมูลพนักงาน (Employees)</h1>
             <p style="color: var(--text-muted);">รายชื่อพนักงาน ข้อมูลสังกัด และการจัดการสถานะการทำงาน</p>
         </div>
         <button class="btn btn-primary" onclick="openAddModal()" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.5rem; font-weight: 600;">
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Filter & Search Bar -->
-    <div class="card glass-card" style="border-radius: var(--radius-lg); margin-bottom: 2rem; padding: 1.25rem;">
+    <div class="card glass-card" style="margin-bottom: 2rem; padding: 1.25rem;">
         <form action="{{ route('employees.index') }}" method="GET" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end; margin: 0;">
             <div class="form-group" style="flex: 1; min-width: 240px; margin-bottom: 0;">
                 <label for="search" class="form-label">ค้นหารายชื่อ / เบอร์โทร</label>
@@ -50,36 +50,36 @@
     </div>
 
     <!-- Employees List Card -->
-    <div class="card glass-card" style="border-radius: var(--radius-lg); padding: 1.5rem;">
+    <div class="card glass-card" style="padding: 1.5rem;">
         @if(count($employees) > 0)
             <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;">
+                <table>
                     <thead>
-                        <tr style="border-bottom: 2px solid var(--border-color); color: var(--text-muted); font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">
-                            <th style="padding: 1rem;">พนักงาน</th>
-                            <th style="padding: 1rem;">อีเมล</th>
-                            <th style="padding: 1rem;">แผนก</th>
-                            <th style="padding: 1rem;">ตำแหน่ง / เงินเดือน</th>
-                            <th style="padding: 1rem;">วันที่เริ่มงาน</th>
-                            <th style="padding: 1rem; text-align: center;">สถานะ</th>
-                            <th style="padding: 1rem; text-align: right;">การจัดการ</th>
+                        <tr>
+                            <th>พนักงาน</th>
+                            <th>อีเมล</th>
+                            <th>แผนก</th>
+                            <th>ตำแหน่ง / เงินเดือน</th>
+                            <th>วันที่เริ่มงาน</th>
+                            <th style="text-align: center;">สถานะ</th>
+                            <th style="text-align: right;">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($employees as $emp)
-                            <tr style="border-bottom: 1px solid var(--border-color);">
-                                <td style="padding: 1rem; font-weight: 600;">
+                            <tr>
+                                <td style="font-weight: 600;">
                                     <div>{{ $emp->first_name }} {{ $emp->last_name }}</div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 400;">โทร: {{ $emp->phone ?? '-' }}</div>
                                 </td>
-                                <td style="padding: 1rem; color: var(--text-muted);">{{ $emp->user->email ?? '-' }}</td>
-                                <td style="padding: 1rem; font-weight: 500;">{{ $emp->department->name ?? '-' }}</td>
-                                <td style="padding: 1rem;">
+                                <td style="color: var(--text-muted);">{{ $emp->user->email ?? '-' }}</td>
+                                <td style="font-weight: 500;">{{ $emp->department->name ?? '-' }}</td>
+                                <td>
                                     <div>{{ $emp->position->title ?? '-' }}</div>
                                     <div style="font-size: 0.75rem; color: var(--text-muted);">{{ number_format($emp->position->base_salary ?? 0) }} ฿/เดือน</div>
                                 </td>
-                                <td style="padding: 1rem;">{{ $emp->join_date ? \Carbon\Carbon::parse($emp->join_date)->format('d M Y') : '-' }}</td>
-                                <td style="padding: 1rem; text-align: center;">
+                                <td>{{ $emp->join_date ? \Carbon\Carbon::parse($emp->join_date)->format('d M Y') : '-' }}</td>
+                                <td style="text-align: center;">
                                     @if($emp->status == 'active')
                                         <span class="badge badge-success">Active</span>
                                     @elseif($emp->status == 'leave')
@@ -88,7 +88,7 @@
                                         <span class="badge badge-danger">Terminated</span>
                                     @endif
                                 </td>
-                                <td style="padding: 1rem; text-align: right;">
+                                <td style="text-align: right;">
                                     <div style="display: flex; justify-content: flex-end; gap: 0.5rem;">
                                         <!-- Edit Button -->
                                         <button class="btn btn-outline" style="padding: 0.35rem 0.75rem; font-size: 0.75rem; color: var(--primary-color); border-color: var(--primary-color);" 
@@ -133,8 +133,8 @@
 </div>
 
 <!-- ================= ADD EMPLOYEE MODAL ================= -->
-<div id="add-employee-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(15,23,42,0.4); backdrop-filter: blur(4px); justify-content: center; align-items: center;">
-    <div class="card glass-card animate-fade-in" style="width: 100%; max-width: 600px; border-radius: var(--radius-lg); padding: 2rem; margin: 1.5rem;">
+<div id="add-employee-modal" class="modal-overlay" style="display: none;">
+    <div class="card glass-card animate-fade-in" style="width: 100%; max-width: 600px; padding: 2rem; margin: 1.5rem;">
         <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
             <span>เพิ่มข้อมูลพนักงานใหม่</span>
             <button onclick="closeAddModal()" style="background: none; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; color: var(--text-muted);">&times;</button>
@@ -221,8 +221,8 @@
 </div>
 
 <!-- ================= EDIT EMPLOYEE MODAL ================= -->
-<div id="edit-employee-modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(15,23,42,0.4); backdrop-filter: blur(4px); justify-content: center; align-items: center;">
-    <div class="card glass-card" style="width: 100%; max-width: 600px; border-radius: var(--radius-lg); padding: 2rem; margin: 1.5rem;">
+<div id="edit-employee-modal" class="modal-overlay" style="display: none;">
+    <div class="card glass-card animate-fade-in" style="width: 100%; max-width: 600px; padding: 2rem; margin: 1.5rem;">
         <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
             <span>แก้ไขข้อมูลพนักงาน</span>
             <button onclick="closeEditModal()" style="background: none; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; color: var(--text-muted);">&times;</button>

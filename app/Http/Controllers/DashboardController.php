@@ -18,8 +18,10 @@ class DashboardController extends Controller
         // Active leaves are pending + approved
         $activeLeaves = Leave::whereIn('status', ['pending', 'approved'])->count();
         
-        // Average salary
-        $avgSalary = round(Position::avg('base_salary') ?? 0, 2);
+        // Average salary based on active employees' positions
+        $avgSalary = $totalEmployees > 0
+            ? round(Employee::join('positions', 'employees.position_id', '=', 'positions.id')->avg('positions.base_salary') ?? 0, 2)
+            : 0;
 
         // Recent employees
         $recentEmployees = Employee::with(['department', 'position'])
