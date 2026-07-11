@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Employee;
 use App\Models\Department;
-use App\Models\Position;
+use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -18,6 +17,7 @@ class AuthController extends Controller
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
+
         return view('auth.login');
     }
 
@@ -30,6 +30,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
+
             return redirect()->intended(route('dashboard'))->with('success', 'เข้าสู่ระบบสำเร็จแล้ว!');
         }
 
@@ -44,6 +45,7 @@ class AuthController extends Controller
             return redirect()->route('dashboard');
         }
         $departments = Department::with('positions')->orderBy('name')->get();
+
         return view('auth.register', compact('departments'));
     }
 
@@ -64,10 +66,10 @@ class AuthController extends Controller
                 'join_date' => 'nullable|date',
             ]);
 
-            $user = DB::transaction(function() use ($request) {
+            $user = DB::transaction(function () use ($request) {
                 // Create user
                 $user = User::create([
-                    'name' => $request->first_name . ' ' . $request->last_name,
+                    'name' => $request->first_name.' '.$request->last_name,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => 'employee',
@@ -114,6 +116,7 @@ class AuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect()->route('login')->with('success', 'ออกจากระบบเรียบร้อยแล้ว');
     }
 }

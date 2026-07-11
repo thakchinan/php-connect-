@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Leave;
 use App\Models\Employee;
+use App\Models\Leave;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,10 +12,10 @@ class LeaveController extends Controller
     public function index()
     {
         $leaves = Leave::with('employee.user')->orderBy('created_at', 'desc')->get();
-        
+
         // Find if the logged-in user has an associated employee profile
         $userEmployee = Auth::user()->employee;
-        
+
         return view('leaves.index', compact('leaves', 'userEmployee'));
     }
 

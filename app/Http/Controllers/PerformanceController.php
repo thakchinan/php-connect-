@@ -10,6 +10,7 @@ class PerformanceController extends Controller
     public function index()
     {
         $employees = Employee::with(['department', 'position'])->orderBy('performance_score', 'desc')->get();
+
         return view('performance.index', compact('employees'));
     }
 

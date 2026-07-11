@@ -43,4 +43,3 @@ class User extends Authenticatable
         $this->save();
     }
 }
-

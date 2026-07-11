@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\Department;
+use App\Models\Employee;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
@@ -21,10 +21,10 @@ class EmployeeController extends Controller
         $query = Employee::with(['department', 'position', 'user']);
 
         if ($search) {
-            $query->where(function($q) use ($search) {
+            $query->where(function ($q) use ($search) {
                 $q->where('first_name', 'like', "%{$search}%")
-                  ->orWhere('last_name', 'like', "%{$search}%")
-                  ->orWhere('phone', 'like', "%{$search}%");
+                    ->orWhere('last_name', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
             });
         }
 
@@ -58,10 +58,10 @@ class EmployeeController extends Controller
             'performance_score' => 'nullable|integer|min:0|max:100',
         ]);
 
-        DB::transaction(function() use ($request) {
+        DB::transaction(function () use ($request) {
             // Create user
             $user = User::create([
-                'name' => $request->first_name . ' ' . $request->last_name,
+                'name' => $request->first_name.' '.$request->last_name,
                 'email' => $request->email,
                 'password' => Hash::make('password123'), // Default password
             ]);
@@ -89,7 +89,7 @@ class EmployeeController extends Controller
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $employee->user_id,
+            'email' => 'required|email|unique:users,email,'.$employee->user_id,
             'phone' => 'nullable|string|max:20',
             'date_of_birth' => 'nullable|date',
             'join_date' => 'nullable|date',
@@ -99,10 +99,10 @@ class EmployeeController extends Controller
             'performance_score' => 'nullable|integer|min:0|max:100',
         ]);
 
-        DB::transaction(function() use ($request, $employee) {
+        DB::transaction(function () use ($request, $employee) {
             // Update user details
             $employee->user->update([
-                'name' => $request->first_name . ' ' . $request->last_name,
+                'name' => $request->first_name.' '.$request->last_name,
                 'email' => $request->email,
             ]);
 
@@ -125,7 +125,7 @@ class EmployeeController extends Controller
 
     public function destroy(Employee $employee)
     {
-        DB::transaction(function() use ($employee) {
+        DB::transaction(function () use ($employee) {
             // Cascade delete will handle the employee when user is deleted,
             // but we can delete the user explicitly to trigger it.
             $employee->user->delete();
